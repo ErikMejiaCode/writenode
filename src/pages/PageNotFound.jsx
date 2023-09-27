@@ -1,3 +1,14 @@
+import { Link } from "react-router-dom";
+import PageNotFoundImg from "../assets/images/notfound.jpg";
+
 export const PageNotFound = () => {
-  return <main>PageNotFound</main>;
+  return (
+    <section className="pageNotFound">
+      <p>404 / Page Not Found</p>
+      <img src={PageNotFoundImg} alt="Page Not Found" />
+      <Link to="/">
+        <button>Back to Home</button>
+      </Link>
+    </section>
+  );
 };
