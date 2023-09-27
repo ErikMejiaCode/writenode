@@ -1,8 +1,23 @@
 import { Link, NavLink } from "react-router-dom";
+import { signInWithPopup, signOut } from "firebase/auth";
+import { auth, provider } from "../firebase/config";
 import Logo from "../assets/logo.png";
+import { useState } from "react";
 
 export const Header = () => {
-  const isAuth = false;
+  const [isAuth, setIsAuth] = useState(false);
+
+  function handleLogin() {
+    signInWithPopup(auth, provider).then((result) => {
+      console.log(result);
+      setIsAuth(true);
+    });
+  }
+
+  function handleLogout() {
+    signOut(auth);
+    setIsAuth(false);
+  }
 
   return (
     <header>
@@ -20,12 +35,12 @@ export const Header = () => {
             <NavLink to="/create" className="link">
               Create
             </NavLink>
-            <button className="auth">
+            <button onClick={handleLogout} className="auth">
               <i className="bi bi-box-arrow-right"></i> Logout
             </button>
           </>
         ) : (
-          <button className="auth">
+          <button onClick={handleLogin} className="auth">
             <i className="bi bi-google"></i> Login
           </button>
         )}
