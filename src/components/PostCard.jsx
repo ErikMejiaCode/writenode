@@ -1,16 +1,14 @@
-import { useNavigate } from "react-router-dom";
 import { doc, deleteDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/config";
 
-export const PostCard = ({ post }) => {
-  const navigate = useNavigate();
+export const PostCard = ({ post, toggle, setToggle }) => {
   const { id, title, description, author } = post;
   const isAuth = JSON.parse(localStorage.getItem("isAuth"));
 
   async function handleDelete() {
     const document = doc(db, "posts", id);
     await deleteDoc(document);
-    navigate("/");
+    setToggle(!toggle);
   }
 
   return (
