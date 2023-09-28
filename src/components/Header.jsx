@@ -10,6 +10,7 @@ export const Header = () => {
   );
 
   function handleLogin() {
+    // eslint-disable-next-line no-unused-vars
     signInWithPopup(auth, provider).then((result) => {
       setIsAuth(true);
       localStorage.setItem("isAuth", true);
